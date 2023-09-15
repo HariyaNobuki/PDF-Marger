@@ -5,6 +5,11 @@ from tools import rotation
 # For Marge
 import pypdf
 
+M1 = ["洞口"]
+M2 = ["針谷"]
+DID2 = ["西原"]
+
+
 if __name__ == '__main__':
     print('slide rotation')
     pdf = "//192.168.11.6//Archive//16_大学院輪講//2023//TED//M2//針谷//"
