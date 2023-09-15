@@ -4,8 +4,8 @@ from PyPDF4 import PdfFileWriter
 
 import os
 
-def Rotation(pdf_name):
-    pdf_open = open(os.path.join(pdf_name,"針谷_中間発表_スライド_4in1-横.pdf"),"rb")      # open by binary mode
+def Rotation(manu_path,ind_name):
+    pdf_open = open(os.path.join(manu_path,"%s_中間発表_スライド_4in1-横.pdf")%(ind_name),"rb")      # open by binary mode
     pdf_reader = PdfFileReader(pdf_open)
     pdf_writer = PdfFileWriter()
 
@@ -17,6 +17,6 @@ def Rotation(pdf_name):
         obj.rotateClockwise(angle) 
         pdf_writer.addPage(obj)
 
-    output = open(os.path.join(pdf_name,"針谷_中間発表_スライド_4in1-縦.pdf"), 'wb')
+    output = open(os.path.join(manu_path,"%s_中間発表_スライド_4in1-縦.pdf")%(ind_name), 'wb')
     pdf_writer.write(output)
     output.close()
