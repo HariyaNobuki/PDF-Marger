@@ -7,7 +7,7 @@ import pypdf
 
 """ Member list """
 M1 = []
-M2 = ["針谷","西原"]
+M2 = ["川崎","針谷"]
 DID2 = []
 ALL_MEMBER = M1+M2+DID2
 
@@ -32,3 +32,9 @@ if __name__ == '__main__':
     merger.write(os.path.join(pdf,'2022年度大学院輪講_中田研_M2_横.pdf'))
     merger.close()
 
+    # M2 AddLink
+    from PyPDF4 import PdfFileReader, PdfFileWriter
+    from PyPDF4.generic import RectangleObject
+    pdf_file_path = os.path.join(pdf,'2022年度大学院輪講_中田研_M2_横.pdf')
+    pdf_reader = PdfFileReader(open(pdf_file_path, 'rb'), strict=True)
+    
