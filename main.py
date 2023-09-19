@@ -47,7 +47,9 @@ if __name__ == '__main__':
     merger.write(os.path.join(pdf,'2022年度大学院輪講_中田研_M2_横.pdf'))
     merger.close()
 
-    # M2 AddLink
+
+
+    ## M2 AddLink
     from PyPDF4 import PdfFileReader, PdfFileWriter
     from PyPDF4.generic import RectangleObject
     pdf_file_path = os.path.join(pdf,'2022年度大学院輪講_中田研_M2_横.pdf')
@@ -60,7 +62,7 @@ if __name__ == '__main__':
         # Decimal('841.91999999999996') Height
         page = pdf_reader.getPage(cp)
         output.addPage(page)
-    # AddLink
+    ## AddLink
     for name in M2:
         output.addLink(
             pagenum=0, 
@@ -69,7 +71,7 @@ if __name__ == '__main__':
             border='dott',
             fit='/Fit'
         )
-    # Output
+    ## Output
     output_name = os.path.join(pdf,'2022年度大学院輪講_中田研_M2_横_1733.pdf')
     output_stream = open(output_name, 'wb')
     output.write(output_stream)
