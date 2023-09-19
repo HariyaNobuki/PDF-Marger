@@ -9,11 +9,11 @@ import pypdf
 
 M2 = ["来栖","川崎","三浦","針谷","平岡"]
 M2_ANN = {
-    "来栖":[42,138.5,42+132,138.5+5],
-    "川崎":[42,138.5,42+132,138.5+5],
-    "三浦":[42,138.5,42+132,138.5+5],
-    "針谷":[42,100.5,42+136,100.5+5],
-    "平岡":[42,138.5,42+132,138.5+5],
+    "来栖":[42, 157.4, 140+132, 157.4+5],
+    "川崎":[42, 138.5, 42+132, 138.5+5],
+    "三浦":[42, 119.5, 103+132, 119.5+5],
+    "針谷":[42, 100.5, 42+136, 100.5+5],
+    "平岡":[42, 81.5, 121+132, 81.5+5],
 }
 
 #0.3528mm = 1pt
@@ -22,23 +22,23 @@ M2P = (1/0.3528)
 if __name__ == '__main__':
     #print('slide rotation')
     pdf = "//192.168.11.6//Archive//16_大学院輪講//2023//TED//"
-#
+
     ## M2 Rotation
-    #M2_path = os.path.join(pdf,"M2")
-    #for ind in M2:
-    #    ind_path = os.path.join(M2_path,ind)
-    #    Rotation(ind_path,ind)
-#
+    M2_path = os.path.join(pdf,"M2")
+    for ind in M2:
+        ind_path = os.path.join(M2_path,ind)
+        Rotation(ind_path,ind)
+
     ## M2 Summary Marge
-    #M2_path = os.path.join(pdf,"M2")
-    #merger = pypdf.PdfMerger()
-    #merger.append(os.path.join(pdf,"_表紙_TED_Only","表紙(M2).pdf"))
-    #for ind in M2:
-    #    ind_path = os.path.join(M2_path,ind)
-    #    merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_予稿.pdf"%(ind))))
-    #    merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_スライド_4in1-横.pdf"%(ind))))
-    #merger.write(os.path.join(pdf,'2022年度大学院輪講_中田研_M2_横.pdf'))
-    #merger.close()
+    M2_path = os.path.join(pdf,"M2")
+    merger = pypdf.PdfMerger()
+    merger.append(os.path.join(pdf,"_表紙_TED_Only","表紙(M2).pdf"))
+    for ind in M2:
+        ind_path = os.path.join(M2_path,ind)
+        merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_予稿.pdf"%(ind))))
+        merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_スライド_4in1-横.pdf"%(ind))))
+    merger.write(os.path.join(pdf,'2022年度大学院輪講_中田研_M2_横.pdf'))
+    merger.close()
 
     # M2 AddLink
     from PyPDF4 import PdfFileReader, PdfFileWriter
