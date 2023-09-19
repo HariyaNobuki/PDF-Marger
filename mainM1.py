@@ -41,7 +41,7 @@ if __name__ == '__main__':
         ind_path = os.path.join(M1_path,ind)
         merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_予稿.pdf"%(ind))))
         merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_スライド_4in1-横.pdf"%(ind))))
-    merger.write(os.path.join(pdf,'2022年度中間発表_中田研_M1_横.pdf'))
+    merger.write(os.path.join(pdf,'2023年度中間発表_中田研_M1_横.pdf'))
     merger.close()
     """縦"""
     M1_path = os.path.join(pdf,"M1")
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         ind_path = os.path.join(M1_path,ind)
         merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_予稿.pdf"%(ind))))
         merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_スライド_4in1-縦.pdf"%(ind))))
-    merger.write(os.path.join(pdf,'2022年度中間発表_中田研_M1_縦.pdf'))
+    merger.write(os.path.join(pdf,'2023年度中間発表_中田研_M1_縦.pdf'))
     merger.close()
 
     ## _Get Page 
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     """横"""
     from PyPDF4 import PdfFileReader, PdfFileWriter
     from PyPDF4.generic import RectangleObject
-    pdf_file_path = os.path.join(pdf,'2022年度中間発表_中田研_M1_横.pdf')
+    pdf_file_path = os.path.join(pdf,'2023年度中間発表_中田研_M1_横.pdf')
     pdf_reader = PdfFileReader(open(pdf_file_path, 'rb'), strict=True)
     output = PdfFileWriter()
     num = pdf_reader.numPages
@@ -94,7 +94,7 @@ if __name__ == '__main__':
             fit='/Fit'
         )
     ## Output
-    output_name = os.path.join(pdf,'2022年度中間発表_中田研_M1_横_fin.pdf')
+    output_name = os.path.join(pdf,'2023年度中間発表_中田研_M1_横_fin.pdf')
     output_stream = open(output_name, 'wb')
     output.write(output_stream)
     output_stream.close()
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     """縦"""
     from PyPDF4 import PdfFileReader, PdfFileWriter
     from PyPDF4.generic import RectangleObject
-    pdf_file_path = os.path.join(pdf,'2022年度中間発表_中田研_M1_縦.pdf')
+    pdf_file_path = os.path.join(pdf,'2023年度中間発表_中田研_M1_縦.pdf')
     pdf_reader = PdfFileReader(open(pdf_file_path, 'rb'), strict=True)
     output = PdfFileWriter()
     num = pdf_reader.numPages
@@ -122,7 +122,7 @@ if __name__ == '__main__':
             fit='/Fit'
         )
     ## Output
-    output_name = os.path.join(pdf,'2022年度中間発表_中田研_M1_縦_fin.pdf')
+    output_name = os.path.join(pdf,'2023年度中間発表_中田研_M1_縦_fin.pdf')
     output_stream = open(output_name, 'wb')
     output.write(output_stream)
     output_stream.close()
