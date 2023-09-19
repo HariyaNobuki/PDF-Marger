@@ -7,74 +7,72 @@ import pypdf
 
 """ Member list """
 
-M1 = ["木元","池口","洞口"]
-M1_ANN = {
-    "木元":[42, 137, 42+90, 137+5],
-    "池口":[42, 118, 42+133, 118+5],
-    "洞口":[42, 99, 42+120, 99+5],
+D1D2 = ["白石","西原"]
+D1D2_ANN = {
+    "白石":[49.5, 130, 49.5+82, 130+12],
+    "西原":[49.5, 111, 49.5+120, 111+5],
 }
-M1_PAGE = {
-    "木元" : 1,
-    "池口" : 1,
-    "洞口" : 1,
+D1D2_PAGE = {
+    "白石" : 1,
+    "西原" : 1,
 }
 
 #0.3528mm = 1pt
-M1P = (1/0.3528)
+D1D2P = (1/0.3528)
 
 if __name__ == '__main__':
     #print('slide rotation')
     pdf = "//192.168.11.6//Archive//16_大学院輪講//2023//TED//"
 
-    ## M1 Rotation
-    M1_path = os.path.join(pdf,"M1")
-    for ind in M1:
-        ind_path = os.path.join(M1_path,ind)
+    ## D1D2 Rotation
+    D1D2_path = os.path.join(pdf,"D1D2")
+    for ind in D1D2:
+        ind_path = os.path.join(D1D2_path,ind)
         Rotation(ind_path,ind)
 
-    ## M1 Summary Marge
+    ## D1D2 Summary Marge
     """横"""
-    M1_path = os.path.join(pdf,"M1")
+    D1D2_path = os.path.join(pdf,"D1D2")
     merger = pypdf.PdfMerger()
-    merger.append(os.path.join(pdf,"_表紙_TED_Only","表紙(M1).pdf"))
-    for ind in M1:
-        ind_path = os.path.join(M1_path,ind)
+    merger.append(os.path.join(pdf,"_表紙_TED_Only","表紙(D1D2).pdf"))
+    for ind in D1D2:
+        ind_path = os.path.join(D1D2_path,ind)
         merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_予稿.pdf"%(ind))))
         merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_スライド_4in1-横.pdf"%(ind))))
-    merger.write(os.path.join(pdf,'2022年度中間発表_中田研_M1_横.pdf'))
+    merger.write(os.path.join(pdf,'2022年度中間発表_中田研_D1D2_横.pdf'))
     merger.close()
     """縦"""
-    M1_path = os.path.join(pdf,"M1")
+    D1D2_path = os.path.join(pdf,"D1D2")
     merger = pypdf.PdfMerger()
-    merger.append(os.path.join(pdf,"_表紙_TED_Only","表紙(M1).pdf"))
-    for ind in M1:
-        ind_path = os.path.join(M1_path,ind)
+    merger.append(os.path.join(pdf,"_表紙_TED_Only","表紙(D1D2).pdf"))
+    for ind in D1D2:
+        ind_path = os.path.join(D1D2_path,ind)
         merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_予稿.pdf"%(ind))))
         merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_スライド_4in1-縦.pdf"%(ind))))
-    merger.write(os.path.join(pdf,'2022年度中間発表_中田研_M1_縦.pdf'))
+    merger.write(os.path.join(pdf,'2022年度中間発表_中田研_D1D2_縦.pdf'))
     merger.close()
 
     ## _Get Page 
     from PyPDF4 import PdfFileReader, PdfFileWriter
     from PyPDF4.generic import RectangleObject
     sum_pages = 0
-    for idx in range(len(M1)):
-        ind = M1[idx]
-        ind_path = os.path.join(M1_path,ind)
+    for idx in range(len(D1D2)):
+        ind = D1D2[idx]
+        ind_path = os.path.join(D1D2_path,ind)
         pdf_reader_proceeding = PdfFileReader(open(os.path.join(ind_path,"%s_中間発表_予稿.pdf"%(ind)), 'rb'), strict=True)
         pdf_reader_proceeding_page = pdf_reader_proceeding.numPages
         pdf_reader_slide = PdfFileReader(open(os.path.join(ind_path,"%s_中間発表_スライド_4in1-横.pdf"%(ind)), 'rb'), strict=True)
         pdf_reader_slide_page = pdf_reader_slide.numPages
-        if M1[idx] != M1[-1]:
-            M1_PAGE[M1[idx+1]] += (pdf_reader_proceeding_page + pdf_reader_slide_page)+sum_pages
+        if D1D2[idx] != D1D2[-1]:
+            D1D2_PAGE[D1D2[idx+1]] += (pdf_reader_proceeding_page + pdf_reader_slide_page)+sum_pages
             sum_pages += (pdf_reader_proceeding_page + pdf_reader_slide_page)
 
 
-    ## M1 AddLink
+    ## D1D2 AddLink
     """横"""
     from PyPDF4 import PdfFileReader, PdfFileWriter
     from PyPDF4.generic import RectangleObject
-    pdf_file_path = os.path.join(pdf,'2022年度中間発表_中田研_M1_横.pdf')
+    pdf_file_path = os.path.join(pdf,'2022年度中間発表_中田研_D1D2_横.pdf')
     pdf_reader = PdfFileReader(open(pdf_file_path, 'rb'), strict=True)
     output = PdfFileWriter()
     num = pdf_reader.numPages
@@ -85,16 +83,16 @@ if __name__ == '__main__':
         page = pdf_reader.getPage(cp)
         output.addPage(page)
     ## AddLink
-    for name in M1:
+    for name in D1D2:
         output.addLink(
             pagenum=0, 
-            pagedest=M1_PAGE[name], 
-            rect=RectangleObject([M1_ANN[name][0]*M1P,M1_ANN[name][1]*M1P, M1_ANN[name][2]*M1P,M1_ANN[name][3]*M1P]),
+            pagedest=D1D2_PAGE[name], 
+            rect=RectangleObject([D1D2_ANN[name][0]*D1D2P,D1D2_ANN[name][1]*D1D2P, D1D2_ANN[name][2]*D1D2P,D1D2_ANN[name][3]*D1D2P]),
             border='dott',
             fit='/Fit'
         )
     ## Output
-    output_name = os.path.join(pdf,'2022年度中間発表_中田研_M1_横_fin.pdf')
+    output_name = os.path.join(pdf,'2022年度中間発表_中田研_D1D2_横_fin.pdf')
     output_stream = open(output_name, 'wb')
     output.write(output_stream)
     output_stream.close()
@@ -102,7 +100,7 @@ if __name__ == '__main__':
     """縦"""
     from PyPDF4 import PdfFileReader, PdfFileWriter
     from PyPDF4.generic import RectangleObject
-    pdf_file_path = os.path.join(pdf,'2022年度中間発表_中田研_M1_縦.pdf')
+    pdf_file_path = os.path.join(pdf,'2022年度中間発表_中田研_D1D2_縦.pdf')
     pdf_reader = PdfFileReader(open(pdf_file_path, 'rb'), strict=True)
     output = PdfFileWriter()
     num = pdf_reader.numPages
@@ -113,16 +111,16 @@ if __name__ == '__main__':
         page = pdf_reader.getPage(cp)
         output.addPage(page)
     ## AddLink
-    for name in M1:
+    for name in D1D2:
         output.addLink(
             pagenum=0, 
-            pagedest=M1_PAGE[name], 
-            rect=RectangleObject([M1_ANN[name][0]*M1P,M1_ANN[name][1]*M1P, M1_ANN[name][2]*M1P,M1_ANN[name][3]*M1P]),
+            pagedest=D1D2_PAGE[name], 
+            rect=RectangleObject([D1D2_ANN[name][0]*D1D2P,D1D2_ANN[name][1]*D1D2P, D1D2_ANN[name][2]*D1D2P,D1D2_ANN[name][3]*D1D2P]),
             border='dott',
             fit='/Fit'
         )
     ## Output
-    output_name = os.path.join(pdf,'2022年度中間発表_中田研_M1_縦_fin.pdf')
+    output_name = os.path.join(pdf,'2022年度中間発表_中田研_D1D2_縦_fin.pdf')
     output_stream = open(output_name, 'wb')
     output.write(output_stream)
     output_stream.close()
