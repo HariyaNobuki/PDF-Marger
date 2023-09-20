@@ -8,9 +8,9 @@ import pypdf
 """ Member list """
 M1 = ["木元","池口","洞口"]
 M1_ANN = {
-    "木元":[42, 137, 42+90, 137+5],
-    "池口":[42, 118, 42+133, 118+5],
-    "洞口":[42, 99, 42+120, 99+5],
+    "木元":[42, 257, 42+90, 257+5],
+    "池口":[42, 238, 42+133, 238+5],
+    "洞口":[42, 219, 42+120, 219+5],
 }
 M1_PAGE = {
     "木元" : 2,
@@ -97,6 +97,30 @@ if __name__ == '__main__':
     merger.write(os.path.join(pdf,'2023年度中間発表_中田研_ALL_横.pdf'))
     merger.close()
 
+    """縦"""
+    merger = pypdf.PdfMerger()
+    merger.append(os.path.join(pdf,"_表紙_TED_Only","表紙(ALL).pdf"))
+    # M2
+    M2_path = os.path.join(pdf,"M2")
+    for ind in M2:
+        ind_path = os.path.join(M2_path,ind)
+        merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_予稿.pdf"%(ind))))
+        merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_スライド_4in1-縦.pdf"%(ind))))
+    # D1D2
+    D1D2_path = os.path.join(pdf,"D1D2")
+    for ind in D1D2:
+        ind_path = os.path.join(D1D2_path,ind)
+        merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_予稿.pdf"%(ind))))
+        merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_スライド_4in1-縦.pdf"%(ind))))
+    # M1
+    M1_path = os.path.join(pdf,"M1")
+    for ind in M1:
+        ind_path = os.path.join(M1_path,ind)
+        merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_予稿.pdf"%(ind))))
+        merger.append(os.path.join(ind_path,os.path.join(ind_path,"%s_中間発表_スライド_4in1-縦.pdf"%(ind))))
+    merger.write(os.path.join(pdf,'2023年度中間発表_中田研_ALL_縦.pdf'))
+    merger.close()
+
 
     ## _Get Page 
     from PyPDF4 import PdfFileReader, PdfFileWriter
@@ -153,9 +177,6 @@ if __name__ == '__main__':
     output = PdfFileWriter()
     num = pdf_reader.numPages
     for cp in range(num):
-        # p_size = page.mediaBox
-        # Decimal('595.32000000000005') Width
-        # Decimal('841.91999999999996') Height
         page = pdf_reader.getPage(cp)
         output.addPage(page)
     ## AddLink
@@ -175,8 +196,16 @@ if __name__ == '__main__':
             border='dott',
             fit='/Fit'
         )
+    for name in M1:
+        output.addLink(
+            pagenum=1, 
+            pagedest=M1_PAGE[name], 
+            rect=RectangleObject([M1_ANN[name][0]*M2P,M1_ANN[name][1]*M2P, M1_ANN[name][2]*M2P,M1_ANN[name][3]*M2P]),
+            border='dott',
+            fit='/Fit'
+        )
     ## Output
-    output_name = os.path.join(pdf,'2023年度大学院輪講_中田研_ALL_横_fin.pdf')
+    output_name = os.path.join(pdf,'2023年度_中田研_予稿集.pdf')
     output_stream = open(output_name, 'wb')
     output.write(output_stream)
     output_stream.close()
@@ -184,14 +213,11 @@ if __name__ == '__main__':
     """縦"""
     from PyPDF4 import PdfFileReader, PdfFileWriter
     from PyPDF4.generic import RectangleObject
-    pdf_file_path = os.path.join(pdf,'2023年度大学院輪講_中田研_M2_縦.pdf')
+    pdf_file_path = os.path.join(pdf,'2023年度中間発表_中田研_ALL_縦.pdf')
     pdf_reader = PdfFileReader(open(pdf_file_path, 'rb'), strict=True)
     output = PdfFileWriter()
     num = pdf_reader.numPages
     for cp in range(num):
-        # p_size = page.mediaBox
-        # Decimal('595.32000000000005') Width
-        # Decimal('841.91999999999996') Height
         page = pdf_reader.getPage(cp)
         output.addPage(page)
     ## AddLink
@@ -203,8 +229,24 @@ if __name__ == '__main__':
             border='dott',
             fit='/Fit'
         )
+    for name in D1D2:
+        output.addLink(
+            pagenum=0, 
+            pagedest=D1D2_PAGE[name], 
+            rect=RectangleObject([D1D2_ANN[name][0]*M2P,D1D2_ANN[name][1]*M2P, D1D2_ANN[name][2]*M2P,D1D2_ANN[name][3]*M2P]),
+            border='dott',
+            fit='/Fit'
+        )
+    for name in M1:
+        output.addLink(
+            pagenum=1, 
+            pagedest=M1_PAGE[name], 
+            rect=RectangleObject([M1_ANN[name][0]*M2P,M1_ANN[name][1]*M2P, M1_ANN[name][2]*M2P,M1_ANN[name][3]*M2P]),
+            border='dott',
+            fit='/Fit'
+        )
     ## Output
-    output_name = os.path.join(pdf,'2023年度大学院輪講_中田研_M2_縦_1733.pdf')
+    output_name = os.path.join(pdf,'2023年度中間発表_中田研_ALL_縦_fin.pdf')
     output_stream = open(output_name, 'wb')
     output.write(output_stream)
     output_stream.close()
