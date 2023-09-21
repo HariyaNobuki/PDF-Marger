@@ -1,9 +1,8 @@
 import os
-# My Tools
-from tools.rotation import Rotation
-
 # For Marge
 import pypdf
+# My Tools
+from tools.rotation import Rotation
 
 """ Member list """
 M1 = ["木元","池口","洞口"]
@@ -47,10 +46,10 @@ D1D2_PAGE = {
 
 
 #0.3528mm = 1pt
-M2P = (1/0.3528)        # mm 2 pts
+M2P = (1/0.3528)        # mm to points
 
 if __name__ == '__main__':
-    pdf = "C://gitedit//NKT_Merger//TED"
+    pdf = "C://gitedit//NKT_Merger//TED"    # Path where collected pdf files
     merger = pypdf.PdfMerger()
 
     """ Rotation """
