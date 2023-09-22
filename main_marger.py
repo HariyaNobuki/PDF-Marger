@@ -4,6 +4,10 @@ import pypdf
 # My Tools
 from tools.rotation import Rotation
 
+""" Input : %s_中間発表_予稿.pdf"%(ind),%s_中間発表_スライド_4in1-横.pdf """
+
+""" Output : """
+
 """ Member list """
 M1 = ["木元","池口","洞口"]
 M1_ANN = {
@@ -85,7 +89,6 @@ MEMBER_PAGE = \
     "白石" : 2,
     "西原" : 2,
 }
-
 
 #0.3528mm = 1pt
 M2P = (1/0.3528)        # mm to points
